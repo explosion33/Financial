@@ -1,0 +1,12 @@
+{% if sub_list %}
+
+{% for subsidiary in sub_list %}
+
+    <li> <a href='{% url "GILTI:subdetail" subsidiary.client.id subsidiary.id %}'>{{subsidiary.name}} </a> </li>
+{% endfor %}
+
+{% else %}
+
+<p>No Subsidiarys</p>
+
+{% endif %}
