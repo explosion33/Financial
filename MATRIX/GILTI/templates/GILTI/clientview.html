@@ -22,8 +22,11 @@ Clients:
 {% for client in client_list %}
     <div>
         <a href='{% url "GILTI:subview" client.id %}'>{{client}}</a>
-
-        <a href='{% url "GILTI:clientdelete" client.id %}' style="padding: 0px; text-align: right; margin-left: 75%; margin-right: 0px;">DELETE</a>
+        <a href='{% url "GILTI:updateclient" client.id %}' style="padding: 0px; text-align: right; margin-left: 50%; margin-right: 0px; color: blue;">Edit Client</a>
+        <a href='{% url "GILTI:clientdelete" client.id %}' style="padding: 0px; text-align: right; margin-left: 75%; margin-right: 0px; color: red;">DELETE</a>
     </div>
 {% endfor %}
 
+<br>
+
+{% comment %} <a href='{% url "GILTI:createclient" %}' style="color: green;">Add Client</a> {% endcomment %}

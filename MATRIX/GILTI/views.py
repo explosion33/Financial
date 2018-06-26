@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.views import generic
-
+from django.http import HttpResponseRedirect
 from .models import *
 
 # Create your views here.
@@ -13,14 +13,22 @@ class ClientView(generic.ListView):
         
         return client_list
 
-class ClientCreate():
+class ClientCreate(generic.UpdateView):
     pass
+
+
+class ClientUpdate(generic.UpdateView):
+    model = Client
+    fields = '__all__'
+    template_name = 'GILTI/updateclient.html'
+
+
 
 def ClientDelete(*args, **kwargs):
     print("")
     print("")
     Client.objects.filter(id=kwargs['client_id']).delete()
-    return redirect('/GILTI',permanent=False)
+    return HttpResponseRedirect('/GILTI')
     
 
     
@@ -53,17 +61,16 @@ class SubDetail(generic.DetailView):
         
 class SubCreate():
     pass    
-def SubDelete(request, client_id):
-    print("")
-    print("")
-    print("")
-    print("")
-    print("")
-    print("DELETE")
-    print("")
-    print("")
-    print("")
-    print("")
-    print("")
-    return ClientView()
+def SubDelete(*args, **kwargs):
+
+    client_id = kwargs['client_id']
+    sub_id = kwargs['pk']
+
+    sub = Subsidiary.objects.filter(id=sub_id)
+    sub.delete()
+    return HttpResponseRedirect('/GILTI/sub' + str(client_id))
+
+
+
+
 

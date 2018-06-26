@@ -1,7 +1,7 @@
 from django.db import models
 import datetime
+from django.urls import reverse_lazy, reverse
 
-# Create your models here.
 
 class Client(models.Model):
     id = models.AutoField(primary_key=True)
@@ -10,6 +10,9 @@ class Client(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('GILTI:clientview')
 
 class Subsidiary(models.Model):
     id = models.AutoField(primary_key=True)
