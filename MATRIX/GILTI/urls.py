@@ -8,5 +8,8 @@ urlpatterns = [
     path('sub<int:client_id>-<pk>/detail', views.SubDetail.as_view(), name='subdetail'),
     path('<int:client_id>', views.ClientDelete, name='clientdelete'),
     path('upclient/<pk>', views.ClientUpdate.as_view(), name='updateclient'),
-    path('<int:client_id>/<pk>', views.SubDelete, name='subdelete')
+    path('<int:client_id>/<pk>', views.SubDelete, name='subdelete'),
+    path('createclient', views.ClientCreate, name='createclient'),
+    path('createsub/loc<int:client_id>', views.SubCreate, name='createsub'),
+    path('updatesub/<pk>', views.SubUpdate.as_view(), name='updatesub'),
 ]

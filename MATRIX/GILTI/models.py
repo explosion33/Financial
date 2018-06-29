@@ -6,7 +6,7 @@ from django.urls import reverse_lazy, reverse
 class Client(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
-    year_end = models.DateField(blank=True)
+    year_end = models.DateField(blank=True, default=datetime.date.today)
 
     def __str__(self):
         return self.name
@@ -29,3 +29,7 @@ class Subsidiary(models.Model):
     for_tax = models.FloatField(default=0)
     qbai = models.FloatField(default=0)
     int_exp = models.FloatField(default=0) 
+
+    def get_absolute_url(self):
+        return reverse('GILTI:subview', kwargs={'pk':self.client.id})
+    

@@ -1,17 +1,25 @@
 {% if sub_list %}
 
+Subsidiarys:
+<br>
+<table>
 {% for subsidiary in sub_list %}
     <div>
-        <a href='{% url "GILTI:subdetail" subsidiary.client_id subsidiary.id %}'>{{subsidiary.name}}</a>
-
-        <a href='{% url "GILTI:subdelete" subsidiary.client_id subsidiary.id %}' style="padding: 0px; text-align: right; margin-left: 75%; margin-right: 0px; color: red;">DELETE</a>
+    <tr>    
+        <td><a href='{% url "GILTI:subdetail" subsidiary.client_id subsidiary.id %}'>{{subsidiary.name}}</a></td>
+        <td><a href='{% url "GILTI:updatesub" subsidiary.id %}' style="color: blue;">Edit subsidiary</a></td>
+        <td><a href='{% url "GILTI:subdelete" subsidiary.client_id subsidiary.id %}' style="color: red;">DELETE</a></td>
+    </tr>
     </div>
 {% endfor %}
-
+</table>
 {% else %}
 
 <p>No Subsidiarys</p>
 
 {% endif %}
+<br>
+<a href='{% url "GILTI:createsub" client.id %}' style="color: green;"> Add Subsidiary </a>
+
 
 

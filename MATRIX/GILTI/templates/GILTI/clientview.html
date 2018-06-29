@@ -19,14 +19,17 @@ div.delete{
 Clients:
 <br>
 <div>
+<table>
 {% for client in client_list %}
     <div>
-        <a href='{% url "GILTI:subview" client.id %}'>{{client}}</a>
-        <a href='{% url "GILTI:updateclient" client.id %}' style="padding: 0px; text-align: right; margin-left: 50%; margin-right: 0px; color: blue;">Edit Client</a>
-        <a href='{% url "GILTI:clientdelete" client.id %}' style="padding: 0px; text-align: right; margin-left: 75%; margin-right: 0px; color: red;">DELETE</a>
+        <tr>
+        <td><a href='{% url "GILTI:subview" client.id %}'>{{client}}</a></td>
+        <td><a href='{% url "GILTI:updateclient" client.id %}' style="color: blue;">Edit Client</a></td>
+        <td><a href='{% url "GILTI:clientdelete" client.id %}' style="color: red;">DELETE</a></td>
+        </tr>
     </div>
 {% endfor %}
-
+</table>
 <br>
 
-{% comment %} <a href='{% url "GILTI:createclient" %}' style="color: green;">Add Client</a> {% endcomment %}
+<a href='{% url "GILTI:createclient" %}' style="color: green;">Add Client</a>

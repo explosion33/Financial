@@ -1,24 +1,317 @@
-<a>Client: {{sub.client}} </a>
-<br>
-<a>Name: {{sub.name}} </a>
-<br>
-<a>Country: {{sub.country}}</a>
-<br>
-<a>Ownership: {{sub.ownership}}%</a>
-<br>
-<a>Reference: {{sub.ref}}</a>
-<br>
-<br> 
-<a>Gross Income: {{sub.gross_income}} $</a>
-<br>
-<a>ECI: {{sub.eci}} $</a>
-<br>
-<a>Subpart F: {{sub.sub_f}} $</a>
-<br>
-<a>Related Party Dividends: {{sub.rp_div}} $</a>
-<br>
-<a>Forigen Taxes Paid: {{sub.for_tax}} $</a>
-<br>
-<a>Qualified Buisness Asset Investment: {{sub.qbai}} %</a>
-<br>
-<a>Interest Expense: {{sub.int_exp}}$</a>
+<table frame="box">
+        <tr>
+            <td>Gross Income over deductions (including taxes):</td>
+                {% for sub in sub_data %}
+                    <td>{{sub.0}}</td>
+                {% endfor %}
+        </tr>
+
+        <tr>
+                <td>CFC Exclusions - ECI'</td>
+                    {% for sub in sub_data %}
+                        <td>{{sub.1}}</td>
+                    {% endfor %}
+        </tr>
+
+        <tr>
+            <td>CFC Exclusions - Subpart F</td>
+                {% for sub in sub_data %}
+                    <td>{{sub.2}}</td>
+                {% endfor %}
+        </tr>
+
+        <tr>
+            <td>CFC Exclusions - Related Party Dividends</td>
+                {% for sub in sub_data %}
+                    <td>{{sub.3}}</td>
+                {% endfor %}
+        </tr>
+
+        <tr>
+                <td>CFC Subtotal * Ownership</td>
+                    {% for sub in sub_data %}
+                        <td>{{sub.4}}</td>
+                    {% endfor %}
+        </tr>
+    
+        <tr>
+                    <td>Tested Loss</td>
+                        {% for sub in sub_data %}
+                            <td>{{sub.5}}</td>
+                        {% endfor %}
+        </tr>
+    
+        <tr>
+                <td>Net CFC Tested Income</td>
+                    {% for sub in sub_data %}
+                        <td>{{sub.6}}</td>
+                    {% endfor %}
+        </tr>
+    
+        <tr>
+                <td>Tested Foreign Income Taxes</td>
+                    {% for sub in sub_data %}
+                        <td>{{sub.7}}</td>
+                    {% endfor %}
+        </tr>
+
+        <tr>
+                    <td>Qualified Business Asset Investment</td>
+                        {% for sub in sub_data %}
+                            <td>{{sub.8}}</td>
+                        {% endfor %}
+        </tr>
+        
+        <tr>
+                        <td>10% of QBAI</td>
+                            {% for sub in sub_data %}
+                                <td>{{sub.9}}</td>
+                            {% endfor %}
+        </tr>
+        
+        <tr>
+                    <td>Interest Expense that reduced tested income and corresponding income not included in tested income</td>
+                        {% for sub in sub_data %}
+                            <td>{{sub.10}}</td>
+                        {% endfor %}
+        </tr>
+        
+        <tr>
+                    <td>Tested Income</td>
+                        {% for sub in sub_data %}
+                            <td>{{sub.11}}</td>
+                        {% endfor %}
+        </tr>
+
+        <tr>
+                        <td>CFC Exclusions - ECI</td>
+                            {% for sub in sub_data %}
+                                <td>{{sub.12}}</td>
+                            {% endfor %}
+        </tr>
+            
+        <tr>
+                            <td>CFC Exclusions - Subpart F</td>
+                                {% for sub in sub_data %}
+                                    <td>{{sub.13}}</td>
+                                {% endfor %}
+        </tr>
+            
+        <tr>
+                        <td>CFC Exclusions - Related Party Dividends</td>
+                            {% for sub in sub_data %}
+                                <td>{{sub.14}}</td>
+                            {% endfor %}
+        </tr>
+            
+        <tr>
+                        <td>CFC Subtotal * Ownership</td>
+                            {% for sub in sub_data %}
+                                <td>{{sub.15}}</td>
+                            {% endfor %}
+        </tr>
+
+        <tr>
+                <td>Tested Loss</td>
+                    {% for sub in sub_data %}
+                        <td>{{sub.16}}</td>
+                    {% endfor %}
+        </tr>
+    
+        <tr>
+                    <td>Net CFC Tested Income</td>
+                        {% for sub in sub_data %}
+                            <td>{{sub.17}}</td>
+                        {% endfor %}
+        </tr>
+    
+        <tr>
+                <td>Tested Foreign Income Taxes</td>
+                    {% for sub in sub_data %}
+                        <td>{{sub.18}}</td>
+                    {% endfor %}
+        </tr>
+    
+        <tr>
+                <td>Qualified Business Asset Investment</td>
+                    {% for sub in sub_data %}
+                        <td>{{sub.19}}</td>
+                    {% endfor %}
+        </tr>
+
+        <tr>
+                <td>10% of QBAI</td>
+                    {% for sub in sub_data %}
+                        <td>{{sub.20}}</td>
+                    {% endfor %}
+        </tr>
+    
+        <tr>
+                    <td>Interest Expense that reduced tested income and corresponding income not included in tested income</td>
+                        {% for sub in sub_data %}
+                            <td>{{sub.21}}</td>
+                        {% endfor %}
+        </tr>
+    
+        <tr>
+                <td>Net deemed tangible income</td>
+                    {% for sub in sub_data %}
+                        <td>{{sub.22}}</td>
+                    {% endfor %}
+        </tr>
+    
+        <tr>
+                <td>GILTI</td>
+                    {% for sub in sub_data %}
+                        <td>{{sub.23}}</td>
+                    {% endfor %}
+        </tr>
+
+        <tr>
+                    <td>Inclusion percentage</td>
+                        {% for sub in sub_data %}
+                            <td>{{sub.24}}</td>
+                        {% endfor %}
+        </tr>
+        
+        <tr>
+                        <td>Deemed paid credit before 20% haircut</td>
+                            {% for sub in sub_data %}
+                                <td>{{sub.25}}</td>
+                            {% endfor %}
+        </tr>
+        
+        <tr>
+                    <td>Deemed paid credit after 20% haircut</td>
+                        {% for sub in sub_data %}
+                            <td>{{sub.26}}</td>
+                        {% endfor %}
+        </tr>
+        
+        <tr>
+                    <td>Taxable Income before GILTI and NOLs</td>
+                        {% for sub in sub_data %}
+                            <td>{{sub.27}}</td>
+                        {% endfor %}
+        </tr>
+
+        <tr>
+                        <td>Grossed up GILTI</td>
+                            {% for sub in sub_data %}
+                                <td>{{sub.28}}</td>
+                            {% endfor %}
+        </tr>
+            
+        <tr>
+                            <td>Net Operating Loss Deduction</td>
+                                {% for sub in sub_data %}
+                                    <td>{{sub.29}}</td>
+                                {% endfor %}
+        </tr>
+            
+        <tr>
+                        <td>Net GILTI</td>
+                            {% for sub in sub_data %}
+                                <td>{{sub.30}}</td>
+                            {% endfor %}
+        </tr>
+            
+        <tr>
+                        <td>50% Deduction</td>
+                            {% for sub in sub_data %}
+                                <td>{{sub.31}}</td>
+                            {% endfor %}
+        </tr>
+
+        <tr>
+                            <td>Taxable income before credit and expense allocation</td>
+                                {% for sub in sub_data %}
+                                    <td>{{sub.32}}</td>
+                                {% endfor %}
+        </tr>
+                
+        <tr>
+                                <td>Expense allocation to GILTI basket</td>
+                                    {% for sub in sub_data %}
+                                        <td>{{sub.33}}</td>
+                                    {% endfor %}
+        </tr>
+                
+        <tr>
+                            <td>GILTI for FTC Limitation</td>
+                                {% for sub in sub_data %}
+                                    <td>{{sub.34}}</td>
+                                {% endfor %}
+        </tr>
+                
+        <tr>
+                            <td>FTC Limitation</td>
+                                {% for sub in sub_data %}
+                                    <td>{{sub.35}}</td>
+                                {% endfor %}
+        </tr>
+
+        <tr>
+                                <td>US tax before credit</td>
+                                    {% for sub in sub_data %}
+                                        <td>{{sub.36}}</td>
+                                    {% endfor %}
+        </tr>
+                    
+        <tr>
+                                    <td>Foreign Tax Credit</td>
+                                        {% for sub in sub_data %}
+                                            <td>{{sub.37}}</td>
+                                        {% endfor %}
+        </tr>
+                    
+        <tr>
+                                <td>US Tax on GILTI</td>
+                                    {% for sub in sub_data %}
+                                        <td>{{sub.38}}</td>
+                                    {% endfor %}
+        </tr>
+                    
+        <tr>
+                                <td>Foreign Effective Tax rate on tested income</td>
+                                    {% for sub in sub_data %}
+                                        <td>{{sub.39}}</td>
+                                    {% endfor %}
+        </tr>
+
+
+        <tr>
+                                    <td>U.S. effective rate</td>
+                                        {% for sub in sub_data %}
+                                            <td>{{sub.40}}</td>
+                                        {% endfor %}
+        </tr>
+                        
+        <tr>
+                                        <td>Taxable Income before GILTI and NOLs</td>
+                                            {% for sub in sub_data %}
+                                                <td>{{sub.41}}</td>
+                                            {% endfor %}
+        </tr>
+                        
+        <tr>
+                                    <td>Net Operating Loss Available</td>
+                                        {% for sub in sub_data %}
+                                            <td>{{sub.42}}</td>
+                                        {% endfor %}
+        </tr>
+                        
+        <tr>
+                                    <td>Amount used for Taxable Income + GILTI</td>
+                                        {% for sub in sub_data %}
+                                            <td>{{sub.43}}</td>
+                                        {% endfor %}
+        </tr>
+
+        <tr>
+                <td>Net Operating Loss Carryforward</td>
+                    {% for sub in sub_data %}
+                        <td>{{sub.44}}</td>
+                    {% endfor %}
+        </tr>
+</table>
