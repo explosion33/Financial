@@ -1,4 +1,28 @@
-<table frame="box">
+<table border='1'>
+        <tr>
+
+            <td></td>
+            {% for sub in subs %}
+                <td><a href='{% url "GILTI:subdelete" sub.client_id sub.id %}' style="color: red;">DELETE</a></td>
+            {% endfor %}
+            <td></td>
+            <td><a href='{% url "GILTI:createsub" subs.0.client_id %}' style="color: green;"> Add Subsidiary </a></td>
+
+
+        </tr>
+
+
+        <tr>
+
+            <td>CLient</td>
+            {% for sub in subs %}
+                <td><a href='{% url "GILTI:updatesub" sub.id %}' style="color: blue;">{{sub.name}}</a></td>
+            {% endfor %}
+
+            <td>US Calculation</td>
+
+        </tr>
+
         <tr>
             <td>Gross Income over deductions (including taxes):</td>
                 {% for sub in sub_data %}

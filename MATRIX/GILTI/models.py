@@ -7,6 +7,8 @@ class Client(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
     year_end = models.DateField(blank=True, default=datetime.date.today)
+    exp_alloc = models.FloatField(default=0)
+    US_Rate = models.FloatField(default=0) 
 
     def __str__(self):
         return self.name
@@ -28,8 +30,9 @@ class Subsidiary(models.Model):
     rp_div = models.FloatField(default=0)
     for_tax = models.FloatField(default=0)
     qbai = models.FloatField(default=0)
-    int_exp = models.FloatField(default=0) 
+    int_exp = models.FloatField(default=0)
+
 
     def get_absolute_url(self):
-        return reverse('GILTI:subview', kwargs={'pk':self.client.id})
+        return reverse('GILTI:subdetail', kwargs={'pk':self.client.id})
     

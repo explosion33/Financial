@@ -6,7 +6,7 @@ Subsidiarys:
 {% for subsidiary in sub_list %}
     <div>
     <tr>    
-        <td><a href='{% url "GILTI:subdetail" subsidiary.client_id subsidiary.id %}'>{{subsidiary.name}}</a></td>
+        <td><a href='{% url "GILTI:subdetail" subsidiary.id %}'>{{subsidiary.name}}</a></td>
         <td><a href='{% url "GILTI:updatesub" subsidiary.id %}' style="color: blue;">Edit subsidiary</a></td>
         <td><a href='{% url "GILTI:subdelete" subsidiary.client_id subsidiary.id %}' style="color: red;">DELETE</a></td>
     </tr>
