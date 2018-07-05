@@ -8,7 +8,8 @@ class Client(models.Model):
     name = models.CharField(max_length=30)
     year_end = models.DateField(blank=True, default=datetime.date.today)
     exp_alloc = models.FloatField(default=0)
-    US_Rate = models.FloatField(default=0) 
+    US_Rate = models.FloatField(default=0)
+    tax_inc = models.FloatField(default=0)
 
     def __str__(self):
         return self.name
