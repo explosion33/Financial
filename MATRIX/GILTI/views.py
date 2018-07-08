@@ -31,8 +31,7 @@ class ClientUpdate(generic.UpdateView):
 
 
 def ClientDelete(*args, **kwargs):
-    print("")
-    print("")
+
     Client.objects.filter(id=kwargs['client_id']).delete()
     return HttpResponseRedirect('/GILTI')
     
@@ -44,7 +43,7 @@ class SubView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         client = kwargs['object']
-        print("")
+
 
         sub_list = Subsidiary.objects.filter(client_id=client.id)
 
@@ -175,46 +174,70 @@ class SubDetail(generic.DetailView):
 
             for sub in subs:
                 slist = [
-                    sub.gross_income,
-                    sub.eci,
-                    sub.sub_f,
-                    sub.rp_div
+                    sub.gross_income,   #0
+                    sub.eci,    #1
+                    sub.sub_f,  #2
+                    sub.rp_div  #3
                 ]
 
-                slist.append(slist[0] + slist[1] + slist[2] + slist[3]),
+                slist.append(slist[0] + slist[1] + slist[2] + slist[3]),    #4
                 slist += [
-                    0,
-                    slist[0] + slist[1] + slist[2] + slist[3],
-                    sub.for_tax,
-                    sub.qbai,
-                    '',
-                    sub.int_exp,
-                    int(sub.gross_income*(sub.ownership/100)),
-                    sub.eci*(sub.ownership/100),
-                    sub.sub_f*(sub.ownership/100),
-                    sub.rp_div*(sub.ownership/100),
-                    sub.gross_income*(sub.ownership/100) + sub.eci*(sub.ownership/100) +
-                    sub.sub_f*(sub.ownership/100) + sub.rp_div*(sub.ownership/100),
-                    0,
-                    sub.gross_income*(sub.ownership/100) + sub.eci*(sub.ownership/100) +
-                    sub.sub_f*(sub.ownership/100) + sub.rp_div*(sub.ownership/100),
-                    sub.for_tax*(sub.ownership/100),
-                    sub.qbai*(sub.ownership/100),
-                    '',
-                    sub.int_exp*(sub.ownership/100),
-
+                    0,  #5
                 ]
 
                 if sub.gross_income < 0:
                     for i in range(0, 5):
                         slist[i] = 0
-                    for i in range(11, 16):
+
+                slist += [
+                    slist[0] + slist[1] + slist[2] + slist[3],  #6
+                    sub.for_tax,    #7
+                    sub.qbai    #8
+                ]
+                slist += [
+                    '', #9
+                    sub.int_exp,    #10
+                ]
+                slist += [
+                    slist[0]*(sub.ownership/100),  #11
+                    slist[1]*(sub.ownership/100),   #12
+                    slist[2]*(sub.ownership/100),   #13
+                    slist[3]*(sub.ownership/100)   #14
+                ]
+
+                
+
+                if sub.gross_income < 0:
+                    for i in range(11, 15):
                         slist[i] = 0
 
                     slist[5] = sub.gross_income
                     slist[6] = slist[5]
-                    slist[16] = slist[11]
-                    slist[17] = slist[11]
+                    #slist[16] = slist[11]
+                    #slist[17] = slist[11]
+
+                slist += [
+                    slist[14] + slist[13] + slist[12] + slist[11],   #15
+                    sub.gross_income *(sub.ownership/100),    #16
+                ]
+
+                if sub.gross_income < 0:
+                    slist[15] = 0
+                else:
+                    slist[16] = 0
+
+                slist += [
+                    slist[15] + slist[16], #17
+                    slist[7] * (sub.ownership/100),   #18
+                    #slist[2]*(sub.ownership/100) + slist[3]*(sub.ownership/100),    #19
+                    #slist[7]*(sub.ownership/100),    #20
+                    slist[8]*(sub.ownership/100),   #19
+                    '', #20
+                    slist[10]*(sub.ownership/100),    #21
+
+                ]
+
+                
                 sub_data.append(slist)
 
             gross = 0
@@ -238,60 +261,62 @@ class SubDetail(generic.DetailView):
             h = 0
 
             for sub in sub_data:
-                gross += sub[0]
-                eci += sub[1]
-                subf += sub[2]
-                rpdiv += sub[3]
-                subtot += sub[4]
-                loss += sub[5]
-                CFCTInc += sub[6]
-                forinc = 0
-                qbai += sub[8]
-                int_exp += sub[10]
-                tinc += sub[11]
-                a += sub[12]
-                b += sub[13]
-                c += sub[14]
-                d += sub[15]
-                e += sub[16]
-                f += sub[17]
-                g += sub[19]
-                h += sub[21]
+                gross += sub[0] #0
+                eci += sub[1]   #1
+                subf += sub[2]  #2
+                rpdiv += sub[3] #3
+                subtot += sub[4]    #4
+                loss += sub[5]  #5
+                CFCTInc += sub[6]   #6
+                forinc = 0  #7
+                qbai += sub[8]  #8
+                int_exp += sub[10]  #10
+                tinc += sub[11] #11
+                a += sub[12]    #12
+                b += sub[13]    #13
+                c += sub[14]    #14
+                d += sub[15]    #15
+                e += sub[16]    #16
+                f += sub[17]    #17
+                g += sub[19]    #19
+                h += sub[21]    #21
 
             us_calc.extend((gross, eci, subf, rpdiv, subtot, loss, CFCTInc, forinc,
                             qbai, (qbai/10), int_exp, tinc, a, b, c, d, e, f, 0, g, g/10, h))
 
-            if us_calc[20] - us_calc[21] <= 1:
+            if us_calc[20] - us_calc[21] <= 1:  #22
                 us_calc.append(0)
             else:
                 us_Calc.append(us_calc[20] - us_calc[21])
 
-            if us_calc[17] - us_calc[22] < 0:
+            if us_calc[17] - us_calc[22] < 0:   #23
                 us_calc.append(0)
             else:
                 us_calc.append(us_calc[17] - us_calc[22])
-            if us_calc[23]/us_calc[15] <= 1:
+            if us_calc[15] == 0:
+                us_calc.append(0)
+            elif us_calc[23]/us_calc[15] <= 1:    #24
                 us_calc.append((us_calc[23]/us_calc[15]) * 100)
             else:
                 us_calc.append('ERROR')
 
             us_calc.extend((0, 0, client.tax_inc, us_calc[23], 0))
 
-            if (us_calc[27] + us_calc[28]) <= 0:
+            if (us_calc[27] + us_calc[28]) <= 0: #30
                 us_calc.append(0)
             else:
                 us_calc.append(us_calc[27] + us_calc[28])
 
-            us_calc.append(0)
+            us_calc.append(0)   #31
 
-            if us_calc[30] < 0:
+            if us_calc[30] < 0: #32
                 us_calc.append(0)
             else:
                 us_calc.append(us_calc[30])
 
             us_calc.extend((client.exp_alloc, (us_calc[30] + client.exp_alloc)))
             us_calc.append(us_calc[34] * 0.21)
-            us_calc.append(us_calc[34] * 0.37)
+            us_calc.append(us_calc[32] * 0.37)
 
             if us_calc[35] < 0:
                 us_calc.append(35)
@@ -312,8 +337,19 @@ class SubDetail(generic.DetailView):
 
             for i in range(0, len(sub_data)):
                 for l in range(0, len(sub_data[i])):
-                    if type(sub_data[i][l]) == float:
-                        sub_data[i][l] = ceil(sub_data[i][l])
+                    if l == 24:
+                        sub_data[i][l] = round(sub_data[i][l], 2)
+                    elif type(sub_data[i][l]) == float:
+                        
+                        if abs(sub_data[i][l] - int(sub_data[i][l])) == 0.5:
+
+                            if sub_data[i][l] < 0:
+                                sub_data[i][l] = ceil(abs((sub_data[i][l]))) * -1
+                            else:
+                                sub_data[i][l] = ceil(sub_data[i][l])
+                        else:
+
+                            sub_data[i][l] = round(sub_data[i][l])
                     
 
         
